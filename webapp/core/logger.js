@@ -3,7 +3,7 @@
 const path = require('path');
 const winston = require('winston');
 require('winston-daily-rotate-file');
-const logger_levels = require('./logger_levels');
+const logger_levels = require('../config/logger_levels');
 
 class Logger {
 
@@ -28,11 +28,13 @@ class Logger {
       this.config.levels[l.name] = l.level
       this.config.colors[l.name] = l.color
     });
-    winston.addColors(this.config.colors);
+
     this.logLevel = (process.env.WINSTON_LOG_LEVEL) ? process.env.WINSTON_LOG_LEVEL : 'all';
+    winston.addColors(this.config.colors);
   }
 
   _initLogger() {
+    this.logger = {};
     this.logger = new winston.Logger({
       transports: [
         new winston.transports.DailyRotateFile({
@@ -69,9 +71,7 @@ class Logger {
   }
 
   _initLogFunctions() {
-    logger_levels.logLevels.forEach( l => {
-      this[l.name] = this.logger[l.name];
-    });
+    logger_levels.logLevels.forEach( l => { this[l.name] = this.logger[l.name]; } );
   }
 }
 

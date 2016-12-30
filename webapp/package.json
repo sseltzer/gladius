@@ -3,15 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node core/app.js"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.14.0",
-    "jade": "~1.11.0",
     "mongoose": "^4.7.5",
+    "pug": "^2.0.0-beta6",
     "serve-favicon": "~2.3.0",
     "winston": "^2.3.0",
     "winston-daily-rotate-file": "^1.4.0"
