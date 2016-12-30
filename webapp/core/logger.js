@@ -39,7 +39,7 @@ class Logger {
       transports: [
         new winston.transports.DailyRotateFile({
           datePattern: 'yyyy-MM-dd',
-          filename: path.join('./', '-daily.log'),
+          filename: path.join('./logs', '-daily.log'),
           prepend: true,
           level: this.logLevel,
           handleExceptions: true,

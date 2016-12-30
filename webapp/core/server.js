@@ -4,7 +4,6 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const port = 3000;
 const app = express();
 
 class Server {
@@ -15,13 +14,13 @@ class Server {
     this.initViewEngine();
     this.initExpressMiddleware();
     this.initRoutes();
-    this.start();
   }
+
   initLogger() {
     app.locals.logger = require('./logger');
   }
 
-  start() {
+  start(port) {
     app.listen(port, () => app.locals.logger.info('app listening on port ' + port));
   }
 
@@ -45,4 +44,4 @@ class Server {
   }
 }
 
-new Server();
+module.exports = new Server();
