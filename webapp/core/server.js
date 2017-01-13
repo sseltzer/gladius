@@ -5,6 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
+const keystoneServer = require('../keystone/keystone_server');
 
 class Server {
 
@@ -22,6 +23,7 @@ class Server {
 
   start(port) {
     app.listen(port, () => app.locals.logger.info('app listening on port ' + port));
+    keystoneServer.start();
   }
 
   initViewEngine() {
