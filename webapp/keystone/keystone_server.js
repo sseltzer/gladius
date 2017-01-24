@@ -1,5 +1,8 @@
 "use strict";
 const keystone = require('keystone');
+require('dotenv').config({path: '/home/node/dev/gladius/webapp/.env'});
+
+console.log(process.env.MONGO_URI);
 
 const config = {
   'name': 'gladius',
@@ -14,7 +17,7 @@ const config = {
   'view engine': 'pug',
 
   //'emails': 'templates/emails',
-
+  'mongo' : "mongodb://172.17.0.1:27017/keystone",
   'auto update': true,
   'session': true,
   'auth': true,

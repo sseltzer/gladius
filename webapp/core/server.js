@@ -37,7 +37,7 @@ class Server {
   }
 
   initDB() {
-    mongoose.connect('mongodb://localhost/gladius');
+    mongoose.connect('mongodb://172.17.0.1/gladius');
   }
 
   initRoutes() {
