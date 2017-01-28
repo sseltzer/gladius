@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node bin/start.js"
+    "start": "gulp",
+    "startSimple": "node bin/start.js"
   },
   "dependencies": {
     "body-parser": "~1.15.2",
@@ -15,5 +16,13 @@
     "serve-favicon": "~2.3.0",
     "winston": "^2.3.0",
     "winston-daily-rotate-file": "^1.4.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-develop-server": "^0.5.2",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-watch": "^4.3.11",
+    "rimraf": "^2.5.4",
+    "run-sequence": "^1.2.2"
   }
 }
