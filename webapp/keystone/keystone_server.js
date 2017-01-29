@@ -1,13 +1,13 @@
 "use strict";
 const path = require('path');
-let envPath = path.join(__dirname, '../.env');
+let envPath = path.join(__dirname, '../config/gladius_config/.env');
 require('dotenv').config({path: envPath});
 
 const keystone = require('keystone');
 const config = {
   'name': 'gladius',
-  'port': 3010,
-  'ssl port' : 3011,
+  'port': process.env.KS_PORT_HTTP,
+  'ssl port' : process.env.KS_PORT_HTTPS,
   'brand': 'gladius',
 
   'sass': 'public',
@@ -22,18 +22,19 @@ const config = {
   'session': true,
   'auth': true,
   'user model': 'User',
-  'cookie secret' : process.env.KS_COOKIE_SECRET,
+  'cookie secret' : process.env.KS_COOKIE_SECRET
 };
 
 class KeystoneServer {
   constructor() {
     this._initLogger();
+    this._initKeystone();
   }
 
   _initLogger() {
   }
 
-  _init() {
+  _initKeystone() {
     keystone.init(config);
     keystone.set('cloudinary config', process.env.KS_CLOUDINARY);
 
