@@ -1,7 +1,9 @@
 "use strict";
+const path = require('path');
+let envPath = path.join(__dirname, '../.env');
+require('dotenv').config({path: envPath});
 
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const app = express();
@@ -37,7 +39,7 @@ class Server {
   }
 
   initDB() {
-    mongoose.connect('mongodb://172.17.0.1/gladius');
+    mongoose.connect(process.env.APP_MONGO_URI);
   }
 
   initRoutes() {

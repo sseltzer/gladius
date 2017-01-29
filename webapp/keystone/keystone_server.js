@@ -1,9 +1,9 @@
 "use strict";
+const path = require('path');
+let envPath = path.join(__dirname, '../.env');
+require('dotenv').config({path: envPath});
+
 const keystone = require('keystone');
-require('dotenv').config({path: '/home/node/dev/gladius/webapp/.env'});
-
-console.log(process.env.MONGO_URI);
-
 const config = {
   'name': 'gladius',
   'port': 3010,
@@ -17,7 +17,7 @@ const config = {
   'view engine': 'pug',
 
   //'emails': 'templates/emails',
-  'mongo' : "mongodb://172.17.0.1:27017/keystone",
+  'mongo' : process.env.CMS_MONGO_URI,
   'auto update': true,
   'session': true,
   'auth': true,

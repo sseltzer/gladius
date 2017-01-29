@@ -46,11 +46,13 @@ gulp.task('watch', function() {
   // The built in gulp.watch cannot watch for new/deleted files. So we use gulp-watch instead.
   // It does not support the normal task runner at this point, so trigger it via gulp.start.
   // Unfortunatly, the built in gulp.watch also blocks logging. The callback style below does not.);
+  gulp_watch(path.join(__dirname, '/.env'),      () => gulp.start('server:restart'));
   gulp_watch(path.join(__dirname, '/app/**'),    () => gulp.start('server:restart'));
   gulp_watch(path.join(__dirname, '/bin/**'),    () => gulp.start('server:restart'));
   gulp_watch(path.join(__dirname, '/config/**'), () => gulp.start('server:restart'));
   gulp_watch(path.join(__dirname, '/core/**'),   () => gulp.start('server:restart'));
   gulp_watch(path.join(__dirname, '/routes/**'), () => gulp.start('server:restart'));
+  gulp_watch(path.join(__dirname, '/keystone/**.js'),   () => gulp.start('server:restart'));
 
   gulp_watch(path.join(__dirname, '/public/**/!(images|javascripts|sass|stylesheets)*'), () => gulp.start('build:public:static'));
   gulp_watch(path.join(__dirname, '/public/images/**'),                                  () => gulp.start('build:public:img'));

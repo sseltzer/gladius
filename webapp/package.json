@@ -17,7 +17,7 @@
     "lodash": "^4.13.1",
     "mongoose": "^4.7.5",
     "node-sass": "^3.3.2",
-    "node-sass-middleware": "^0.9.7",
+    "node-sass-middleware": "^0.9.8",
     "pug": "^2.0.0-beta6",
     "serve-favicon": "~2.3.0",
     "winston": "^2.3.0",

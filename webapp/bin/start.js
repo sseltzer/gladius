@@ -1,6 +1,9 @@
 "use strict";
+const path = require('path');
+let envPath = path.join(__dirname, '../.env');
+require('dotenv').config({path: envPath});
 
-const port = 3000;
+const port = process.env.APP_PORT_HTTP || 3000;
 
 const server = require('../core/server');
 
