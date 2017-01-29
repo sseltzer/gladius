@@ -12,6 +12,11 @@
 **/dist
 **/install_dl/*
 
+#     Env Files      #
+######################
+**/gladius_config/*
+
+
 # Logs and databases #
 ######################
 **/*.log

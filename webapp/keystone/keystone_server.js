@@ -22,7 +22,7 @@ const config = {
   'session': true,
   'auth': true,
   'user model': 'User',
-  'cookie secret' : 'f3fa080653d4f718e43cd6479c0c530d319287198156273659489feb61e66f25ab6c34c7dd1ee29338cbad456c83da06e99759a4e814',
+  'cookie secret' : process.env.KS_COOKIE_SECRET,
 };
 
 class KeystoneServer {
@@ -31,8 +31,11 @@ class KeystoneServer {
   }
 
   _initLogger() {
+  }
+
+  _init() {
     keystone.init(config);
-    keystone.set('cloudinary config', 'cloudinary://853846188952542:n0QZtu7ZqHGj9xVqEyKWHvyd5VM@dswx8ayf7' );
+    keystone.set('cloudinary config', process.env.KS_CLOUDINARY);
 
     keystone.import('models');
     keystone.set('locals', {
