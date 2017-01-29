@@ -32,13 +32,13 @@ gulp.task('build:views', function() {
 
 gulp.task('server:start', function() {
   server.listen(serverOptions, function(error) {
-    console.log(error);
+    if (error) console.log(error);
   });
 });
 gulp.task('server:restart', function() {
   console.log('Running task server:restart');
   server.restart(function(error) {
-    console.log(error);
+    if (error) console.log(error);
   });
 });
 
