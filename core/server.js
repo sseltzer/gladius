@@ -1,8 +1,6 @@
 "use strict";
+const envLoader = require('./env_loader').load();
 const path = require('path');
-let envPath = path.join(__dirname, '../config/gladius_config/.env');
-require('dotenv').config({path: envPath});
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');

@@ -1,7 +1,5 @@
 "use strict";
-const path = require('path');
-let envPath = path.join(__dirname, '../config/gladius_config/.env');
-require('dotenv').config({path: envPath});
+const envLoader = require('../core/env_loader').load();
 
 const keystone = require('keystone');
 const config = {
@@ -79,4 +77,3 @@ class KeystoneServer {
   }
 }
 module.exports = new KeystoneServer();
-
