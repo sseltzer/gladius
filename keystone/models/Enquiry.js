@@ -25,7 +25,8 @@ Enquiry.add({
   },
   enquiryType: {
     type: Types.Select,
-    options: [{
+    options: [
+      {
         value: 'message',
         label: 'Just leaving a message'
       },

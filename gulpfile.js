@@ -1,3 +1,4 @@
+var logger = require('./core/logger');
 var path = require('path');
 var gulp = require('gulp');
 //var $            = require('gulp-load-plugins')();
@@ -6,7 +7,7 @@ var gulp_watch = require('gulp-watch');
 var server = require('gulp-develop-server');
 var sequence = require('run-sequence');
 
-console.log('Building application map from the absolute_root: ' + __dirname);
+logger.info('Building application map from the absolute_root: ' + __dirname);
 
 var serverOptions = {
   path: './bin/start',
@@ -28,9 +29,9 @@ gulp.task('server:start', function(callback) {
   });
 });
 gulp.task('server:restart', function() {
-  console.log('Running task server:restart');
+  logger.info('Running task server:restart');
   server.restart(function(error) {
-    if (error) console.log(error);
+    if (error) logger.error(error);
   });
 });
 
