@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 const path = require('path');
 const envPath = path.join(__dirname, '../config/gladius_config/.env');
-
+const required_env = require('../config/required_env.json');
 class EnvLoader {
 
   constructor() {
@@ -14,16 +14,26 @@ class EnvLoader {
   }
 
   _loadFromDotEnv() {
-    require('dotenv').config({path: envPath, silent: true});
-    return false;
+    require('dotenv').config({
+      path: envPath,
+      silent: true
+    });
   }
 
-  _loadFromEnvVars() {
-    return false;
+  _validateRequiredVars() {
+    let isValid = true;
+    required_env.forEach((envField) => {
+      if (!process.env[envField]) {
+        this.logger.warn(`Missing required env variable: ${envField}`);
+        isValid = false;
+      }
+    });
+    return isValid;
   }
 
   load() {
-    return this._loadFromDotEnv() || this._loadFromEnvVars() || false;
+    this._loadFromDotEnv();
+    return this._validateRequiredVars();
   }
 }
 

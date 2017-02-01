@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const path = require('path');
 const winston = require('winston');
@@ -13,6 +13,7 @@ class Logger {
     this._initLogger();
     this._startStream();
     this._initLogFunctions();
+    this.logger.info('Logger started.');
   }
 
   _initWinstonOptions() {
@@ -24,9 +25,9 @@ class Logger {
     this.config.levels = {};
     this.config.colors = {};
 
-    logger_levels.logLevels.forEach( l => {
-      this.config.levels[l.name] = l.level
-      this.config.colors[l.name] = l.color
+    logger_levels.logLevels.forEach(l => {
+      this.config.levels[l.name] = l.level;
+      this.config.colors[l.name] = l.color;
     });
 
     this.logLevel = (process.env.WINSTON_LOG_LEVEL) ? process.env.WINSTON_LOG_LEVEL : 'all';
@@ -64,15 +65,17 @@ class Logger {
 
   _startStream() {
     module.exports.stream = {
-      write: function(message, encoding) {
-          this.logger.info(message);
+      write: function(message) { //, encoding) {
+        this.logger.info(message);
       }
     };
   }
 
   _initLogFunctions() {
-    logger_levels.logLevels.forEach( l => { this[l.name] = this.logger[l.name]; } );
+    logger_levels.logLevels.forEach(l => {
+      this[l.name] = this.logger[l.name];
+    });
   }
 }
 
-var exports = module.exports = new Logger();
+module.exports = new Logger();
