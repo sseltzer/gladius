@@ -1,8 +1,14 @@
 'use strict';
 
 const path = require('path');
-const envPath = path.join(__dirname, '../config/gladius_config/.env');
-const required_env = require('../config/required_env.json');
+
+const env = 'dev';
+const configPaths = {
+  'schema' : '../config/required_env.json',
+  'dev' : '../config/gladius_config/.env_dev',
+  'tst' : '../config/gladius_config/.env_tst',
+  'prd' : '../config/gladius_config/.env_prd'
+};
 class EnvLoader {
 
   constructor() {
@@ -14,21 +20,38 @@ class EnvLoader {
   }
 
   _loadFromDotEnv() {
+    if (!configPaths[env]) {
+      this.logger.warn(`Missing env to load config file: ${env}`);
+      this.logger.warn(`Supported environments:\n ${JSON.stringify(configPaths, null, 2)}`);
+      return;
+    }
     require('dotenv').config({
-      path: envPath,
+      path: path.join(__dirname, configPaths[env]),
       silent: true
     });
   }
 
   _validateRequiredVars() {
-    let isValid = true;
-    required_env.forEach((envField) => {
-      if (!process.env[envField]) {
-        this.logger.warn(`Missing required env variable: ${envField}`);
-        isValid = false;
+    try {
+      let isValid = true;
+      let required_env = require(configPaths['schema']);
+
+      if (!required_env) {
+        this.logger.warn(`Missing required env variable: ${required_env}`);
+        return false;
       }
-    });
-    return isValid;
+      required_env.forEach((envField) => {
+        if (!process.env[envField]) {
+          this.logger.warn(`Missing required env variable: ${envField}`);
+          isValid = false;
+        }
+      });
+      return isValid;
+    } catch(e) {
+      this.logger.error('Encountered an error while attempting to validate environment variables.');
+      this.logger.error(JSON.stringify(e, null, 2));
+    }
+    return false;
   }
 
   load() {
